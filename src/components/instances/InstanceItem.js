@@ -6,35 +6,63 @@ const InstanceItem = ({ instance }) => {
   const instanceContext = useContext(InstanceContext);
   const { deleteInstance, setInstance, clearCurrentInstance } = instanceContext;
 
-  const { _id, name, email, phone, type } = instance;
+  const {
+    user_id,
+    creation_time,
+    instance_id,
+    instance_type,
+    state,
+    instance_storage,
+    public_ip_address,
+    launch_time
+  } = instance;
   const onDelete = () => {
     console.log("Deleteing");
-    deleteInstance(_id);
+    deleteInstance(instance_id);
     clearCurrentInstance();
   };
 
   return (
     <div className="card bg-light">
-      <h3 className="text-primary text-left">
-        {name} {/*<span*/}
-        {/*  style={{ float: "right" }}*/}
-        {/*  className={*/}
-        {/*    "badge " +*/}
-        {/*    (type === "professional" ? "badge-success" : "badge-primary")*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  {type.charAt(0).toUpperCase() + type.slice(1)}*/}
-        {/*</span>*/}
-      </h3>
       <ul className="list">
-        {email && (
+        {launch_time && (
           <li>
-            <i className="fas fa-envelope-open" /> {email}
+            <i className="fas fa-envelope-open" /> {launch_time}
           </li>
         )}
-        {phone && (
+        {public_ip_address && (
           <li>
-            <i className="fas fa-phone" /> {phone}
+            <i className="fas fa-envelope-open" /> {public_ip_address}
+          </li>
+        )}
+        {instance_storage && (
+          <li>
+            <i className="fas fa-envelope-open" /> {instance_storage}
+          </li>
+        )}
+        {state && (
+          <li>
+            <i className="fas fa-envelope-open" /> {state}
+          </li>
+        )}
+        {user_id && (
+          <li>
+            <i className="fas fa-envelope-open" /> {user_id}
+          </li>
+        )}
+        {creation_time && (
+          <li>
+            <i className="fas fa-phone" /> {creation_time}
+          </li>
+        )}
+        {instance_id && (
+          <li>
+            <i className="fas fa-phone" /> {instance_id}
+          </li>
+        )}
+        {instance_type && (
+          <li>
+            <i className="fas fa-phone" /> {instance_type}
           </li>
         )}
       </ul>

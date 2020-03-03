@@ -30,14 +30,22 @@ const InstanceState = props => {
   // Get Instance
   const getInstances = async () => {
     try {
-      const res = await axios.get("/api/contacts");
+      const res = await axios.get(`${rHost}:${rPort}/instance_data`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        params: {
+          user_token: localStorage.token
+        }
+      });
 
+      const { data } = res.data;
       dispatch({
         type: GET_INSTANCES,
-        payload: res.data
+        payload: data
       });
     } catch (err) {
-      // console.error(err);
+      console.error(err);
       console.log("getInstances");
       // dispatch({
       //   type: INSTANCE_ERROR,
@@ -62,20 +70,20 @@ const InstanceState = props => {
         payload: res.data
       });
 
-      // const { instanceType, pemKey } = instance;
-      // const resTwo = await axios.get(`${rHost}:${rPort}/create_instance`, {
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   params: {
-      //     instance_type: instanceType,
-      //     key_name: pemKey,
-      //     user_token: localStorage.token
-      //   }
-      // });
-      // localStorage.token
-      // const { data } = resTwo;
-      // console.log(data);
+      const { instanceType, pemKey } = instance;
+      const resTwo = await axios.get(`${rHost}:${rPort}/create_instance`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        params: {
+          instance_type: instanceType,
+          key_name: pemKey,
+          user_token: localStorage.token
+        }
+      });
+
+      const { data } = resTwo;
+      console.log(data);
     } catch (err) {
       console.log("addInstance");
       console.error(err);

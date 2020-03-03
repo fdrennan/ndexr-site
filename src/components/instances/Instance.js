@@ -18,6 +18,7 @@ const Instance = () => {
   }
 
   if (instances !== null) {
+    console.log("Not null");
     console.log(instances);
   }
 
@@ -28,7 +29,7 @@ const Instance = () => {
           {filtered !== null
             ? filtered.map(instance => (
                 <CSSTransition
-                  key={instance._id}
+                  key={instance.instance_id}
                   timeout={500}
                   classNames="item"
                 >
@@ -37,7 +38,7 @@ const Instance = () => {
               ))
             : instances.map(instance => (
                 <CSSTransition
-                  key={instance._id}
+                  key={instance.instance_id}
                   timeout={500}
                   classNames="item"
                 >
