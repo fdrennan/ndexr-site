@@ -4,7 +4,12 @@ import InstanceContext from "../../context/instance/instanceContext";
 
 const InstanceItem = ({ instance }) => {
   const instanceContext = useContext(InstanceContext);
-  const { deleteInstance, setInstance, clearCurrentInstance } = instanceContext;
+  const {
+    deleteInstance,
+    setInstance,
+    clearCurrentInstance,
+    getInstances
+  } = instanceContext;
 
   const {
     user_id,
@@ -19,6 +24,7 @@ const InstanceItem = ({ instance }) => {
   const onDelete = () => {
     console.log("Deleteing");
     deleteInstance(instance_id);
+    getInstances();
     clearCurrentInstance();
   };
 

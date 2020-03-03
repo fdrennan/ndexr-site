@@ -75,8 +75,11 @@ const InstanceState = props => {
         }
       });
 
-      const { data } = res;
-      console.log(data);
+      // const { data } = res;
+      // dispatch({
+      //   type: ADD_INSTANCE,
+      //   payload: data.data
+      // });
     } catch (err) {
       console.log("addInstance");
       console.error(err);

@@ -3,11 +3,12 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
 import InstanceContext from "../../context/instance/instanceContext";
-
 const Instance = () => {
+  // sleep time expects milliseconds
   const instanceContext = useContext(InstanceContext);
 
   const { instances, filtered, getInstances, loading } = instanceContext;
+
   useEffect(() => {
     getInstances();
     // eslint-disable-next-line
@@ -17,13 +18,15 @@ const Instance = () => {
     return <h4>Please add a contact</h4>;
   }
 
-  if (instances !== null) {
-    console.log("Not null");
-    console.log(instances);
-  }
+  const refreshInstances = () => {
+    getInstances();
+  };
 
   return (
     <Fragment>
+      <button type="button" onClick={refreshInstances}>
+        Click Me!
+      </button>
       {instances !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null

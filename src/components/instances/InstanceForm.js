@@ -8,8 +8,14 @@ const InstanceForm = () => {
     addInstance,
     updateInstance,
     clearCurrentInstance,
-    instance
+    instance,
+    instances,
+    getInstances
   } = instanceContext;
+  //
+  // useEffect(() => {
+  //   getInstances();
+  // }, [instances]);
 
   useEffect(() => {
     if (instance !== null) {
@@ -44,6 +50,7 @@ const InstanceForm = () => {
     e.preventDefault();
     if (instance === null) {
       addInstance(currentInstance);
+      getInstances();
     } else {
       updateInstance(currentInstance);
     }
