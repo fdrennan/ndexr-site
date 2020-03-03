@@ -1,15 +1,15 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import ContactItem from "./ContactItem";
+import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
-import ContactContext from "../../context/contact/contactContext";
+import InstanceContext from "../../context/instance/instanceContext";
 import RtestContext from "../../context/rtest/rtestContext";
 
-const Contacts = () => {
-  const contactContext = useContext(ContactContext);
+const Instance = () => {
+  const instanceContext = useContext(InstanceContext);
   const rtestContext = useContext(RtestContext);
 
-  const { contacts, filtered, getContacts, loading } = contactContext;
+  const { contacts, filtered, getContacts, loading } = instanceContext;
 
   const { getdata } = rtestContext;
 
@@ -34,7 +34,7 @@ const Contacts = () => {
                   timeout={500}
                   classNames="item"
                 >
-                  <ContactItem contact={contact} />
+                  <InstanceItem contact={contact} />
                 </CSSTransition>
               ))
             : contacts.map(contact => (
@@ -43,7 +43,7 @@ const Contacts = () => {
                   timeout={500}
                   classNames="item"
                 >
-                  <ContactItem contact={contact} />
+                  <InstanceItem contact={contact} />
                 </CSSTransition>
               ))}
         </TransitionGroup>
@@ -54,4 +54,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Instance;
