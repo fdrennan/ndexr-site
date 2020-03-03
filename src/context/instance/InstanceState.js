@@ -63,15 +63,8 @@ const InstanceState = props => {
     };
 
     try {
-      const res = await axios.post("/api/contacts", instance, config);
-
-      dispatch({
-        type: ADD_INSTANCE,
-        payload: res.data
-      });
-
       const { instanceType, pemKey } = instance;
-      const resTwo = await axios.get(`${rHost}:${rPort}/create_instance`, {
+      const res = await axios.get(`${rHost}:${rPort}/create_instance`, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -82,7 +75,7 @@ const InstanceState = props => {
         }
       });
 
-      const { data } = resTwo;
+      const { data } = res;
       console.log(data);
     } catch (err) {
       console.log("addInstance");
@@ -97,17 +90,22 @@ const InstanceState = props => {
   // Delete Contact
   const deleteInstance = async id => {
     try {
-      await axios.delete(`/api/contacts/${id}`);
-
-      dispatch({
-        type: DELETE_INSTANCE,
-        payload: id
+      const res = await axios.get(`${rHost}:${rPort}/instance_modify`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        params: {
+          user_token: localStorage.token,
+          id,
+          method: "terminate"
+        }
       });
     } catch (err) {
+      console.error(err);
       console.log("deleteInstance");
       dispatch({
         type: INSTANCE_ERROR,
-        payload: err.response.msg
+        payload: err.response.message
       });
     }
   };
