@@ -1,42 +1,51 @@
-import React, { useState, useContext, useEffect } from 'react';
-import InstanceContext from '../../context/instance/instanceContext';
+import React, { useState, useContext, useEffect } from "react";
+import InstanceContext from "../../context/instance/instanceContext";
 
 const InstanceForm = () => {
   const instanceContext = useContext(InstanceContext);
 
-  const { addInstance, updateInstance, clearCurrentInstance, instance } = instanceContext;
+  const {
+    addInstance,
+    updateInstance,
+    clearCurrentInstance,
+    instance
+  } = instanceContext;
 
   useEffect(() => {
     if (instance !== null) {
-      setContact(instance);
+      setInstance(instance);
     } else {
-      setContact({
-        name: '',
-        email: '',
-        phone: '',
-        type: 'personal'
+      setInstance({
+        name: "",
+        email: "",
+        phone: "",
+        type: "personal",
+        instanceType: "",
+        pemKey: ""
       });
     }
   }, [instanceContext, instance]);
 
-  const [contact, setContact] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    type: 'personal'
+  const [currentInstance, setInstance] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    type: "personal",
+    instanceType: "",
+    pemKey: ""
   });
 
-  const { name, email, phone, type } = contact;
+  const { name, email, phone, type, instanceType, pemKey } = currentInstance;
 
   const onChange = e =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+    setInstance({ ...currentInstance, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
     if (instance === null) {
-      addInstance(contact);
+      addInstance(currentInstance);
     } else {
-      updateInstance(contact);
+      updateInstance(currentInstance);
     }
     clearAll();
   };
@@ -47,57 +56,71 @@ const InstanceForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>
-        {instance ? 'Edit Contact' : 'Add Contact'}
+      <h2 className="text-primary">
+        {instance ? "Edit Contact" : "Add Contact"}
       </h2>
       <input
-        type='text'
-        placeholder='Name'
-        name='name'
+        type="text"
+        placeholder="Name"
+        name="name"
         value={name}
         onChange={onChange}
       />
       <input
-        type='email'
-        placeholder='Email'
-        name='email'
+        type="email"
+        placeholder="Email"
+        name="email"
         value={email}
         onChange={onChange}
       />
       <input
-        type='text'
-        placeholder='Phone'
-        name='phone'
+        type="text"
+        placeholder="Phone"
+        name="phone"
         value={phone}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        placeholder="t2.nano"
+        name="instanceType"
+        value={instanceType}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        placeholder="Key Name"
+        name="pemKey"
+        value={pemKey}
         onChange={onChange}
       />
       <h5>Contact Type</h5>
       <input
-        type='radio'
-        name='type'
-        value='personal'
-        checked={type === 'personal'}
+        type="radio"
+        name="type"
+        value="personal"
+        checked={type === "personal"}
         onChange={onChange}
-      />{' '}
-      Personal{' '}
+      />{" "}
+      Personal{" "}
       <input
-        type='radio'
-        name='type'
-        value='professional'
-        checked={type === 'professional'}
+        type="radio"
+        name="type"
+        value="professional"
+        checked={type === "professional"}
         onChange={onChange}
-      />{' '}
+      />{" "}
       Professional
       <div>
         <input
-          type='submit'
-          value={instance ? 'Update Contact' : 'Add Contact'}
-          className='btn btn-primary btn-block'
+          type="submit"
+          value={instance ? "Update Contact" : "Add Contact"}
+          className="btn btn-primary btn-block"
         />
       </div>
       {instance && (
         <div>
-          <button className='btn btn-light btn-block' onClick={clearAll}>
+          <button className="btn btn-light btn-block" onClick={clearAll}>
             Clear
           </button>
         </div>

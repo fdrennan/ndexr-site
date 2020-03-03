@@ -15,6 +15,8 @@ import {
   INSTANCE_ERROR
 } from "../types";
 
+const rHost = "http://127.0.0.1";
+const rPort = 5452;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -26,7 +28,7 @@ const InstanceState = props => {
   const [state, dispatch] = useReducer(instanceReducer, initialState);
 
   // Get Instance
-  const getContacts = async () => {
+  const getInstances = async () => {
     try {
       const res = await axios.get("/api/contacts");
 
@@ -35,15 +37,17 @@ const InstanceState = props => {
         payload: res.data
       });
     } catch (err) {
-      dispatch({
-        type: INSTANCE_ERROR,
-        payload: err.response.msg
-      });
+      // console.error(err);
+      console.log("getInstances");
+      // dispatch({
+      //   type: INSTANCE_ERROR,
+      //   payload: err.response.msg
+      // });
     }
   };
 
   // Add Contact
-  const addInstance = async contact => {
+  const addInstance = async instance => {
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -51,22 +55,39 @@ const InstanceState = props => {
     };
 
     try {
-      const res = await axios.post("/api/contacts", contact, config);
+      const res = await axios.post("/api/contacts", instance, config);
+
       dispatch({
         type: ADD_INSTANCE,
         payload: res.data
       });
+
+      // const { instanceType, pemKey } = instance;
+      // const resTwo = await axios.get(`${rHost}:${rPort}/create_instance`, {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   params: {
+      //     instance_type: instanceType,
+      //     key_name: pemKey,
+      //     user_token: localStorage.token
+      //   }
+      // });
+      // localStorage.token
+      // const { data } = resTwo;
+      // console.log(data);
     } catch (err) {
-      console.log(err);
-      dispatch({
-        type: INSTANCE_ERROR,
-        payload: err.response.msg
-      });
+      console.log("addInstance");
+      console.error(err);
+      // dispatch({
+      //   type: INSTANCE_ERROR,
+      //   payload: err.response.msg
+      // });
     }
   };
 
   // Delete Contact
-  const deleteContact = async id => {
+  const deleteInstance = async id => {
     try {
       await axios.delete(`/api/contacts/${id}`);
 
@@ -75,6 +96,7 @@ const InstanceState = props => {
         payload: id
       });
     } catch (err) {
+      console.log("deleteInstance");
       dispatch({
         type: INSTANCE_ERROR,
         payload: err.response.msg
@@ -83,7 +105,7 @@ const InstanceState = props => {
   };
 
   // Update Contact
-  const updateInstance = async contact => {
+  const updateInstance = async instance => {
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -92,8 +114,8 @@ const InstanceState = props => {
 
     try {
       const res = await axios.put(
-        `/api/contacts/${contact._id}`,
-        contact,
+        `/api/contacts/${instance._id}`,
+        instance,
         config
       );
 
@@ -115,8 +137,8 @@ const InstanceState = props => {
   };
 
   // Set Current Contact
-  const setCurrent = contact => {
-    dispatch({ type: SET_CURRENT_INSTANCE, payload: contact });
+  const setInstance = instance => {
+    dispatch({ type: SET_CURRENT_INSTANCE, payload: instance });
   };
 
   // Clear Current Contact
@@ -125,7 +147,7 @@ const InstanceState = props => {
   };
 
   // Filter Instance
-  const filterContacts = text => {
+  const filterInstances = text => {
     dispatch({ type: FILTER_INSTANCES, payload: text });
   };
 
@@ -142,13 +164,13 @@ const InstanceState = props => {
         filtered: state.filtered,
         error: state.error,
         addInstance,
-        deleteContact,
-        setCurrent,
+        deleteInstance,
+        setInstance,
         clearCurrentInstance,
         updateInstance,
-        filterContacts,
+        filterInstances,
         clearFilter,
-        getContacts,
+        getInstances,
         clearContacts
       }}
     >

@@ -3,47 +3,45 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
 import InstanceContext from "../../context/instance/instanceContext";
-import RtestContext from "../../context/rtest/rtestContext";
 
 const Instance = () => {
   const instanceContext = useContext(InstanceContext);
-  const rtestContext = useContext(RtestContext);
 
-  const { contacts, filtered, getContacts, loading } = instanceContext;
-
-  const { getdata } = rtestContext;
-
+  const { instances, filtered, getInstances, loading } = instanceContext;
   useEffect(() => {
-    getContacts();
-    getdata();
+    getInstances();
     // eslint-disable-next-line
   }, []);
 
-  if (contacts !== null && contacts.length === 0 && !loading) {
+  if (instances !== null && instances.length === 0 && !loading) {
     return <h4>Please add a contact</h4>;
+  }
+
+  if (instances !== null) {
+    console.log(instances);
   }
 
   return (
     <Fragment>
-      {contacts !== null && !loading ? (
+      {instances !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null
-            ? filtered.map(contact => (
+            ? filtered.map(instance => (
                 <CSSTransition
-                  key={contact._id}
+                  key={instance._id}
                   timeout={500}
                   classNames="item"
                 >
-                  <InstanceItem contact={contact} />
+                  <InstanceItem instance={instance} />
                 </CSSTransition>
               ))
-            : contacts.map(contact => (
+            : instances.map(instance => (
                 <CSSTransition
-                  key={contact._id}
+                  key={instance._id}
                   timeout={500}
                   classNames="item"
                 >
-                  <InstanceItem contact={contact} />
+                  <InstanceItem instance={instance} />
                 </CSSTransition>
               ))}
         </TransitionGroup>
