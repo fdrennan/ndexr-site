@@ -62,8 +62,8 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
+  title: 'NDEXR',
+  icon: 'fas fa-microchip'
 };
 
 export default Navbar;

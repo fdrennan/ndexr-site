@@ -3,19 +3,15 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ContactItem from "./ContactItem";
 import Spinner from "../layout/Spinner";
 import ContactContext from "../../context/contact/contactContext";
-import RtestContext from "../../context/rtest/rtestContext";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
-  const rtestContext = useContext(RtestContext);
 
   const { contacts, filtered, getContacts, loading } = contactContext;
 
-  const { getdata } = rtestContext;
-
   useEffect(() => {
     getContacts();
-    getdata();
+
     // eslint-disable-next-line
   }, []);
 

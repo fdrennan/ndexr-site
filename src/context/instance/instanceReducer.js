@@ -14,6 +14,8 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case GET_INSTANCES:
+      console.log("Payload");
+      console.log(action.payload);
       return {
         ...state,
         instances: action.payload,
@@ -22,7 +24,7 @@ export default (state, action) => {
     case ADD_INSTANCE:
       return {
         ...state,
-        instances: [action.payload, state.instances],
+        instances: [action.payload, ...state.instances],
         loading: false
       };
     case UPDATE_INSTANCE:
