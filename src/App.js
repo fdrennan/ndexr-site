@@ -11,7 +11,7 @@ import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import InstanceState from "./context/instance/InstanceState";
 
-import "./App.css";
+import "./App.scss";
 
 const App = () => {
   return (

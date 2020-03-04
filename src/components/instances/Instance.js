@@ -7,7 +7,7 @@ const Instance = () => {
   // sleep time expects milliseconds
   const instanceContext = useContext(InstanceContext);
 
-  const { instances, filtered, getInstances, loading } = instanceContext;
+  const { instances, getInstances, loading } = instanceContext;
 
   useEffect(() => {
     getInstances();

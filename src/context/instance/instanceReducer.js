@@ -1,7 +1,5 @@
 import {
   GET_INSTANCES,
-  ADD_INSTANCE,
-  DELETE_INSTANCE,
   SET_CURRENT_INSTANCE,
   CLEAR_CURRENT_INSTANCE,
   UPDATE_INSTANCE,
@@ -21,25 +19,11 @@ export default (state, action) => {
         instances: action.payload,
         loading: false
       };
-    case ADD_INSTANCE:
-      return {
-        ...state,
-        instances: [action.payload, state.instances],
-        loading: false
-      };
     case UPDATE_INSTANCE:
       return {
         ...state,
         instances: state.instances.map(contact =>
           contact._id === action.payload._id ? action.payload : contact
-        ),
-        loading: false
-      };
-    case DELETE_INSTANCE:
-      return {
-        ...state,
-        instances: state.instances.filter(
-          contact => contact._id !== action.payload
         ),
         loading: false
       };

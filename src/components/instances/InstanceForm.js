@@ -17,19 +17,19 @@ const InstanceForm = () => {
       setInstance(instance);
     } else {
       setInstance({
-        instanceStorage: "",
-        instanceType: "",
-        pemKey: "",
-        imageId: ""
+        instanceStorage: "60",
+        instanceType: "p2.xlarge",
+        pemKey: "Shiny",
+        imageId: "ami-0f75bb5fd5fa9f972"
       });
     }
   }, [instanceContext, instance]);
 
   const [currentInstance, setInstance] = useState({
-    instanceStorage: "",
-    instanceType: "",
-    pemKey: "",
-    imageId: ""
+    instanceStorage: "60",
+    instanceType: "p2.xlarge",
+    pemKey: "Shiny",
+    imageId: "ami-0f75bb5fd5fa9f972"
   });
 
   const { instanceType, pemKey, instanceStorage, imageId } = currentInstance;

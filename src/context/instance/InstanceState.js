@@ -4,8 +4,6 @@ import InstanceContext from "./instanceContext";
 import instanceReducer from "./instanceReducer";
 import {
   GET_INSTANCES,
-  ADD_INSTANCE,
-  DELETE_INSTANCE,
   SET_CURRENT_INSTANCE,
   CLEAR_CURRENT_INSTANCE,
   UPDATE_INSTANCE,
@@ -15,8 +13,10 @@ import {
   INSTANCE_ERROR
 } from "../types";
 
+// BASE AMI: ami-0f75bb5fd5fa9f972
+
 const rHost = "http://127.0.0.1";
-const rPort = 3411;
+const rPort = 3364;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -47,24 +47,14 @@ const InstanceState = props => {
     } catch (err) {
       console.error(err);
       console.log("getInstances");
-      // dispatch({
-      //   type: INSTANCE_ERROR,
-      //   payload: err.response.msg
-      // });
     }
   };
 
   // Add Contact
   const addInstance = async instance => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-
     try {
       const { instanceType, pemKey, instanceStorage, imageId } = instance;
-      const res = await axios.get(`${rHost}:${rPort}/create_instance`, {
+      await axios.get(`${rHost}:${rPort}/create_instance`, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -76,33 +66,23 @@ const InstanceState = props => {
           user_token: localStorage.token
         }
       });
-
-      // const { data } = res;
-      // dispatch({
-      //   type: ADD_INSTANCE,
-      //   payload: data.data
-      // });
     } catch (err) {
       console.log("addInstance");
       console.error(err);
-      // dispatch({
-      //   type: INSTANCE_ERROR,
-      //   payload: err.response.msg
-      // });
     }
   };
 
   // Delete Contact
-  const deleteInstance = async id => {
+  const modifyInstance = async (id, modify) => {
     try {
-      const res = await axios.get(`${rHost}:${rPort}/instance_modify`, {
+      await axios.get(`${rHost}:${rPort}/instance_modify`, {
         headers: {
           "Content-Type": "application/json"
         },
         params: {
           user_token: localStorage.token,
           id,
-          method: "terminate"
+          method: modify
         }
       });
     } catch (err) {
@@ -175,7 +155,7 @@ const InstanceState = props => {
         filtered: state.filtered,
         error: state.error,
         addInstance,
-        deleteInstance,
+        modifyInstance,
         setInstance,
         clearCurrentInstance,
         updateInstance,
