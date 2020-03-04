@@ -16,7 +16,7 @@ import {
 // BASE AMI: ami-0f75bb5fd5fa9f972
 
 const rHost = "http://127.0.0.1";
-const rPort = 3364;
+const rPort = 5497;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -73,7 +73,7 @@ const InstanceState = props => {
   };
 
   // Delete Contact
-  const modifyInstance = async (id, modify) => {
+  const modifyInstance = async (id, modify, instanceType = "") => {
     try {
       await axios.get(`${rHost}:${rPort}/instance_modify`, {
         headers: {
@@ -82,7 +82,8 @@ const InstanceState = props => {
         params: {
           user_token: localStorage.token,
           id,
-          method: modify
+          method: modify,
+          instance_type: instanceType
         }
       });
     } catch (err) {

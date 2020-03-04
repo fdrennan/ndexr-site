@@ -25,6 +25,14 @@ const InstanceItem = ({ instance }) => {
     login
   } = instance;
 
+  const [instanceType, setIntanceType] = useState("");
+
+  const onSetInstanceType = e => {
+    e.preventDefault();
+    setIntanceType(e.target.value);
+    getInstances();
+  };
+
   const onDelete = () => {
     modifyInstance(instance_id, "terminate");
     clearCurrentInstance();
@@ -47,17 +55,32 @@ const InstanceItem = ({ instance }) => {
     getInstances();
   };
 
+  const onModify = () => {
+    modifyInstance(instance_id, "modify", instanceType);
+    clearCurrentInstance();
+    getInstances();
+  };
+
   return (
     <div className="card bg-light">
       <p className={"btn btn-dark btn-block"}>
         {!public_ip_address ? (
           <strong>{state[0].toUpperCase() + state.slice(1)}</strong>
         ) : (
-          <strong>Public IP: {public_ip_address}</strong>
+          <strong>{public_ip_address}</strong>
         )}
       </p>
       <Collapse isOpened={hidden}>
         {login}
+        <ul className="list">
+          {public_ip_address && (
+            <li>
+              <p>
+                <strong>Public IP:</strong> {public_ip_address}
+              </p>
+            </li>
+          )}
+        </ul>
         <ul className="list">
           {launch_time && (
             <li>
@@ -113,6 +136,20 @@ const InstanceItem = ({ instance }) => {
             </button>
             <button className="btn btn-danger btn-sm" onClick={onDelete}>
               Terminate
+            </button>
+          </p>
+        }
+        {
+          <p>
+            <input
+              type="text"
+              placeholder="t2.xlarge"
+              name="instanceType"
+              value={instanceType}
+              onChange={onSetInstanceType}
+            />
+            <button className="btn btn-danger btn-sm" onClick={onModify}>
+              Modify
             </button>
           </p>
         }
