@@ -14,6 +14,8 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case GET_INSTANCES:
+      console.log("GET_INSTANCES");
+      console.log(action.payload);
       return {
         ...state,
         instances: action.payload,

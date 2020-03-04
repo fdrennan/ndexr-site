@@ -22,32 +22,30 @@ const Instance = () => {
     getInstances();
   };
 
+  if (instances === "false") {
+    return <div>Create an instance to get started</div>;
+  }
+
   return (
     <Fragment>
-      <button type="button" onClick={refreshInstances}>
-        Click Me!
+      <button
+        type="button"
+        onClick={refreshInstances}
+        className="btn btn-primary btn-block"
+      >
+        Refresh!
       </button>
       {instances !== null && !loading ? (
         <TransitionGroup>
-          {filtered !== null
-            ? filtered.map(instance => (
-                <CSSTransition
-                  key={instance.instance_id}
-                  timeout={500}
-                  classNames="item"
-                >
-                  <InstanceItem instance={instance} />
-                </CSSTransition>
-              ))
-            : instances.map(instance => (
-                <CSSTransition
-                  key={instance.instance_id}
-                  timeout={500}
-                  classNames="item"
-                >
-                  <InstanceItem instance={instance} />
-                </CSSTransition>
-              ))}
+          {instances.map(instance => (
+            <CSSTransition
+              key={instance.instance_id}
+              timeout={500}
+              classNames="item"
+            >
+              <InstanceItem instance={instance} />
+            </CSSTransition>
+          ))}
         </TransitionGroup>
       ) : (
         <Spinner />

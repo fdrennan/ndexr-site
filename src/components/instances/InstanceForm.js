@@ -9,39 +9,30 @@ const InstanceForm = () => {
     updateInstance,
     clearCurrentInstance,
     instance,
-    instances,
     getInstances
   } = instanceContext;
-  //
-  // useEffect(() => {
-  //   getInstances();
-  // }, [instances]);
 
   useEffect(() => {
     if (instance !== null) {
       setInstance(instance);
     } else {
       setInstance({
-        name: "",
-        email: "",
-        phone: "",
-        type: "personal",
+        instanceStorage: "",
         instanceType: "",
-        pemKey: ""
+        pemKey: "",
+        imageId: ""
       });
     }
   }, [instanceContext, instance]);
 
   const [currentInstance, setInstance] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    type: "personal",
+    instanceStorage: "",
     instanceType: "",
-    pemKey: ""
+    pemKey: "",
+    imageId: ""
   });
 
-  const { name, email, phone, type, instanceType, pemKey } = currentInstance;
+  const { instanceType, pemKey, instanceStorage, imageId } = currentInstance;
 
   const onChange = e =>
     setInstance({ ...currentInstance, [e.target.name]: e.target.value });
@@ -64,64 +55,41 @@ const InstanceForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <h2 className="text-primary">
-        {instance ? "Edit Contact" : "Add Contact"}
+        {instance ? "Edit Contact" : "Build Server"}
       </h2>
       <input
         type="text"
-        placeholder="Name"
-        name="name"
-        value={name}
-        onChange={onChange}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        name="email"
-        value={email}
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        placeholder="Phone"
-        name="phone"
-        value={phone}
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        placeholder="t2.nano"
+        placeholder="Instance Type: t2.nano"
         name="instanceType"
         value={instanceType}
         onChange={onChange}
       />
       <input
         type="text"
-        placeholder="Key Name"
+        placeholder="Image ID: ami-0fc20dd1da406780b"
+        name="imageId"
+        value={imageId}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        placeholder="Instance Storage: 50"
+        name="instanceStorage"
+        value={instanceStorage}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        placeholder="PEM: Key Name"
         name="pemKey"
         value={pemKey}
         onChange={onChange}
       />
-      <h5>Contact Type</h5>
-      <input
-        type="radio"
-        name="type"
-        value="personal"
-        checked={type === "personal"}
-        onChange={onChange}
-      />{" "}
-      Personal{" "}
-      <input
-        type="radio"
-        name="type"
-        value="professional"
-        checked={type === "professional"}
-        onChange={onChange}
-      />{" "}
-      Professional
+
       <div>
         <input
           type="submit"
-          value={instance ? "Update Contact" : "Add Contact"}
+          value={instance ? "Update Contact" : "Start Server"}
           className="btn btn-primary btn-block"
         />
       </div>

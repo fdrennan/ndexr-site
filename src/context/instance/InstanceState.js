@@ -16,7 +16,7 @@ import {
 } from "../types";
 
 const rHost = "http://127.0.0.1";
-const rPort = 5452;
+const rPort = 3411;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -63,7 +63,7 @@ const InstanceState = props => {
     };
 
     try {
-      const { instanceType, pemKey } = instance;
+      const { instanceType, pemKey, instanceStorage, imageId } = instance;
       const res = await axios.get(`${rHost}:${rPort}/create_instance`, {
         headers: {
           "Content-Type": "application/json"
@@ -71,6 +71,8 @@ const InstanceState = props => {
         params: {
           instance_type: instanceType,
           key_name: pemKey,
+          instance_storage: instanceStorage,
+          image_id: imageId,
           user_token: localStorage.token
         }
       });

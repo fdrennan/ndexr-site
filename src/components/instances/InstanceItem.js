@@ -14,6 +14,7 @@ const InstanceItem = ({ instance }) => {
   const {
     user_id,
     creation_time,
+    image_id,
     instance_id,
     instance_type,
     state,
@@ -33,42 +34,51 @@ const InstanceItem = ({ instance }) => {
       <ul className="list">
         {launch_time && (
           <li>
-            <i className="fas fa-envelope-open" /> {launch_time}
+            <p>
+              <strong>Launch Time:</strong> {launch_time}
+            </p>
           </li>
         )}
         {public_ip_address && (
           <li>
-            <i className="fas fa-envelope-open" /> {public_ip_address}
+            <p>
+              <strong>Public IP Address:</strong> {public_ip_address}
+            </p>
           </li>
         )}
         {instance_storage && (
           <li>
-            <i className="fas fa-envelope-open" /> {instance_storage}
+            <p>
+              <strong>Instance Storage:</strong> {instance_storage}
+            </p>
+          </li>
+        )}
+        {image_id && (
+          <li>
+            <p>
+              <strong>AMI Type:</strong> {image_id}
+            </p>
           </li>
         )}
         {state && (
           <li>
-            <i className="fas fa-envelope-open" /> {state}
-          </li>
-        )}
-        {user_id && (
-          <li>
-            <i className="fas fa-envelope-open" /> {user_id}
-          </li>
-        )}
-        {creation_time && (
-          <li>
-            <i className="fas fa-phone" /> {creation_time}
+            <p>
+              <strong>Current State:</strong> {state}
+            </p>
           </li>
         )}
         {instance_id && (
           <li>
-            <i className="fas fa-phone" /> {instance_id}
+            <p>
+              <strong>Instance Id:</strong> {instance_id}
+            </p>
           </li>
         )}
         {instance_type && (
           <li>
-            <i className="fas fa-phone" /> {instance_type}
+            <p>
+              <strong>Instance Type:</strong> {instance_type}
+            </p>
           </li>
         )}
       </ul>
