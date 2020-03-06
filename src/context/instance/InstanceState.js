@@ -16,7 +16,7 @@ import {
 // BASE AMI: ami-0f75bb5fd5fa9f972
 
 const rHost = "http://127.0.0.1";
-const rPort = 5497;
+const rPort = 8000;
 const InstanceState = props => {
   const initialState = {
     instances: null,
