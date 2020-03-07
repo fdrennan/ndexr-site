@@ -21,7 +21,7 @@ const InstanceForm = () => {
         instanceType: "t2.xlarge",
         pemKey: "Shiny",
         imageId: "ami-0f75bb5fd5fa9f972",
-        securityGroupName: "testr"
+        securityGroupName: "ndexr"
       });
     }
   }, [instanceContext, instance]);
@@ -31,7 +31,7 @@ const InstanceForm = () => {
     instanceType: "t2.xlarge",
     pemKey: "Shiny",
     imageId: "ami-0f75bb5fd5fa9f972",
-    securityGroupName: "testr"
+    securityGroupName: "ndexr"
   });
 
   const {

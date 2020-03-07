@@ -63,15 +63,19 @@ const InstanceItem = ({ instance }) => {
 
   return (
     <div className="card bg-light">
-      <p className={"btn btn-dark btn-block"}>
-        {!public_ip_address ? (
-          <strong>{state[0].toUpperCase() + state.slice(1)}</strong>
-        ) : (
-          <strong>{public_ip_address}</strong>
-        )}
-      </p>
+      <button onClick={buttonPush} className="btn btn-primary btn-block">
+        <div className="div-left">
+          {!public_ip_address ? (
+            <strong>{state[0].toUpperCase() + state.slice(1)}</strong>
+          ) : (
+            <strong>{public_ip_address}</strong>
+          )}
+        </div>
+        <i className="fas fa-bars div-right" />
+      </button>
+
       <Collapse isOpened={hidden}>
-        {login}
+        <code>{login}</code>
         <ul className="list">
           {public_ip_address && (
             <li>
@@ -154,10 +158,6 @@ const InstanceItem = ({ instance }) => {
           </p>
         }
       </Collapse>
-      <button onClick={buttonPush} className="btn btn-primary btn-block">
-        {" "}
-        {hidden ? "Collapse" : "Expand"}
-      </button>
     </div>
   );
 };

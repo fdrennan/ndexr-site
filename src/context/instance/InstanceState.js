@@ -14,8 +14,8 @@ import {
 } from "../types";
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
-const R_HOST = process.env.R_HOST;
-const R_PORT = process.env.R_PORT;
+const R_HOST = "http://127.0.0.1";
+const R_PORT = 7530;
 const InstanceState = props => {
   const initialState = {
     instances: null,
