@@ -20,7 +20,8 @@ const InstanceForm = () => {
         instanceStorage: "60",
         instanceType: "t2.xlarge",
         pemKey: "Shiny",
-        imageId: "ami-0f75bb5fd5fa9f972"
+        imageId: "ami-0f75bb5fd5fa9f972",
+        securityGroupName: "testr"
       });
     }
   }, [instanceContext, instance]);
@@ -29,10 +30,17 @@ const InstanceForm = () => {
     instanceStorage: "60",
     instanceType: "t2.xlarge",
     pemKey: "Shiny",
-    imageId: "ami-0f75bb5fd5fa9f972"
+    imageId: "ami-0f75bb5fd5fa9f972",
+    securityGroupName: "testr"
   });
 
-  const { instanceType, pemKey, instanceStorage, imageId } = currentInstance;
+  const {
+    instanceType,
+    pemKey,
+    instanceStorage,
+    imageId,
+    securityGroupName
+  } = currentInstance;
 
   const onChange = e =>
     setInstance({ ...currentInstance, [e.target.name]: e.target.value });
@@ -85,7 +93,13 @@ const InstanceForm = () => {
         value={pemKey}
         onChange={onChange}
       />
-
+      <input
+        type="text"
+        placeholder="Security Group Name"
+        name="securityGroupName"
+        value={securityGroupName}
+        onChange={onChange}
+      />
       <div>
         <input
           type="submit"

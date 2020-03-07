@@ -36,21 +36,28 @@ const Navbar = ({ title, icon }) => {
   const guestLinks = (
     <Fragment>
       <li>
-        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
       </li>
     </Fragment>
   );
 
   return (
     <div className="navbar bg-primary">
-      <h1>
-        <Link to="/">
-          <i className={icon} /> {title}
-        </Link>
-      </h1>
+      <div className="navbar-left">
+        <h1>
+          <Link to="/">
+            <i className={icon} /> {title}
+          </Link>
+        </h1>
+        <h1>
+          <li>
+            <Link to="/security">Security</Link>
+          </li>
+        </h1>
+      </div>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );

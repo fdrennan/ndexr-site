@@ -25,11 +25,11 @@ const InstanceItem = ({ instance }) => {
     login
   } = instance;
 
-  const [instanceType, setIntanceType] = useState("");
+  const [instanceType, setInstanceType] = useState("");
 
   const onSetInstanceType = e => {
     e.preventDefault();
-    setIntanceType(e.target.value);
+    setInstanceType(e.target.value);
     getInstances();
   };
 

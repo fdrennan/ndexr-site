@@ -14,9 +14,8 @@ import {
 } from "../types";
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
-
-const rHost = "http://127.0.0.1";
-const rPort = 8000;
+const R_HOST = process.env.R_HOST;
+const R_PORT = process.env.R_PORT;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -30,7 +29,7 @@ const InstanceState = props => {
   // Get Instance
   const getInstances = async () => {
     try {
-      const res = await axios.get(`${rHost}:${rPort}/instance_data`, {
+      const res = await axios.get(`${R_HOST}:${R_PORT}/instance_data`, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -53,8 +52,14 @@ const InstanceState = props => {
   // Add Contact
   const addInstance = async instance => {
     try {
-      const { instanceType, pemKey, instanceStorage, imageId } = instance;
-      await axios.get(`${rHost}:${rPort}/create_instance`, {
+      const {
+        instanceType,
+        pemKey,
+        instanceStorage,
+        imageId,
+        securityGroupName
+      } = instance;
+      await axios.get(`${R_HOST}:${R_PORT}/create_instance`, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -63,7 +68,8 @@ const InstanceState = props => {
           key_name: pemKey,
           instance_storage: instanceStorage,
           image_id: imageId,
-          user_token: localStorage.token
+          user_token: localStorage.token,
+          security_group_name: securityGroupName
         }
       });
     } catch (err) {
@@ -75,7 +81,7 @@ const InstanceState = props => {
   // Delete Contact
   const modifyInstance = async (id, modify, instanceType = "") => {
     try {
-      await axios.get(`${rHost}:${rPort}/instance_modify`, {
+      await axios.get(`${R_HOST}:${R_PORT}/instance_modify`, {
         headers: {
           "Content-Type": "application/json"
         },
