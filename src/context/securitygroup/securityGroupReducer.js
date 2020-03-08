@@ -1,4 +1,4 @@
-import { GET_SECURITY_GROUP } from "../types";
+import { GET_SECURITY_GROUP, CREATE_KEY_FILE } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,6 +8,12 @@ export default (state, action) => {
       return {
         ...state,
         securityGroups: action.payload
+      };
+    case CREATE_KEY_FILE:
+      console.log("CREATE_KEY_FILE");
+      return {
+        ...state,
+        keyFile: action.payload
       };
     default:
       return state;

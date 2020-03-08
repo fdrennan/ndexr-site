@@ -3,13 +3,16 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
 import InstanceContext from "../../context/instance/instanceContext";
+import SecurityGroupContext from "../../context/securitygroup/securityGroupContext";
 
 const Instance = () => {
   const instanceContext = useContext(InstanceContext);
+  const securityGroupContext = useContext(SecurityGroupContext);
   const { instances, getInstances, loading } = instanceContext;
-
+  const { createKeyFile } = securityGroupContext;
   useEffect(() => {
     getInstances();
+    createKeyFile("ndexr");
     // eslint-disable-next-line
   }, []);
 
@@ -22,7 +25,11 @@ const Instance = () => {
   };
 
   if (instances === "false") {
-    return <div>Create an instance to get started</div>;
+    return (
+      <div>
+        <h2>Create an instance to get started</h2>
+      </div>
+    );
   }
 
   return (

@@ -20,7 +20,7 @@ const SecurityGroupForm = () => {
   };
 
   const onSubmit = () => {
-    console.log(currentSg);
+    console.log("submitted");
   };
 
   return (
@@ -28,8 +28,8 @@ const SecurityGroupForm = () => {
       {securityGroups &&
         securityGroups.map(x => (
           <div className="container" key={x.group_name}>
-            <h1>{x.group_name}</h1>
-            <h2>{x.group_id}</h2>
+            {/*<h1>{x.group_name}</h1>*/}
+            {/*<h2>{x.group_id}</h2>*/}
           </div>
         ))}
       <h2 className="text-primary">Add Security Group</h2>

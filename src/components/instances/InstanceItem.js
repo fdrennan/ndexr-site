@@ -1,19 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Collapse } from "react-collapse";
 
 import InstanceContext from "../../context/instance/instanceContext";
-
+import SecurityGroupContext from "../../context/securitygroup/securityGroupContext";
 const InstanceItem = ({ instance }) => {
   const instanceContext = useContext(InstanceContext);
-
+  const securityGroupContext = useContext(SecurityGroupContext);
   const {
     modifyInstance,
     clearCurrentInstance,
     getInstances
   } = instanceContext;
 
+  const { createKeyFile } = securityGroupContext;
+
   const [hidden, setHidden] = useState(false);
 
+  useEffect(() => {
+    console.log(instance);
+  }, []);
   const {
     image_id,
     instance_id,
@@ -22,7 +27,8 @@ const InstanceItem = ({ instance }) => {
     instance_storage,
     public_ip_address,
     launch_time,
-    login
+    login,
+    key_name
   } = instance;
 
   const [instanceType, setInstanceType] = useState("");
@@ -59,6 +65,10 @@ const InstanceItem = ({ instance }) => {
     modifyInstance(instance_id, "modify", instanceType);
     clearCurrentInstance();
     getInstances();
+  };
+
+  const displayPem = () => {
+    createKeyFile(key_name);
   };
 
   return (
@@ -127,6 +137,13 @@ const InstanceItem = ({ instance }) => {
               <p>
                 <strong>Instance Id:</strong> {instance_id}
               </p>
+            </li>
+          )}
+          {key_name && (
+            <li>
+              <button className="btn btn-success btn-sm" onClick={displayPem}>
+                Display PEM in Console - To see push [CMD+OPT+I] in Chrome
+              </button>
             </li>
           )}
         </ul>

@@ -19,7 +19,7 @@ const InstanceForm = () => {
       setInstance({
         instanceStorage: "60",
         instanceType: "t2.xlarge",
-        pemKey: "Shiny",
+        pemKey: "ndexr",
         imageId: "ami-0f75bb5fd5fa9f972",
         securityGroupName: "ndexr"
       });
@@ -29,7 +29,7 @@ const InstanceForm = () => {
   const [currentInstance, setInstance] = useState({
     instanceStorage: "60",
     instanceType: "t2.xlarge",
-    pemKey: "Shiny",
+    pemKey: "ndexr",
     imageId: "ami-0f75bb5fd5fa9f972",
     securityGroupName: "ndexr"
   });
