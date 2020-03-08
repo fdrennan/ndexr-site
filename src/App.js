@@ -10,35 +10,38 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import InstanceState from "./context/instance/InstanceState";
+import SecurityGroupState from "./context/securitygroup/securityGroupState";
 import SecurityGroup from "./components/pages/SecurityGroup";
 import "./App.scss";
 
 const App = () => {
   return (
     <AuthState>
-      <InstanceState>
-        <AlertState>
-          <Router>
-            <Fragment>
-              <Navbar />
-              <div className="container">
-                <Alerts />
-                <Switch>
-                  <PrivateRoute exact path="/" component={Home} />
-                  <PrivateRoute
-                    exact
-                    path="/security"
-                    component={SecurityGroup}
-                  />
-                  <Route exact path="/about" component={About} />
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
-                </Switch>
-              </div>
-            </Fragment>
-          </Router>
-        </AlertState>
-      </InstanceState>
+      <SecurityGroupState>
+        <InstanceState>
+          <AlertState>
+            <Router>
+              <Fragment>
+                <Navbar />
+                <div className="container">
+                  <Alerts />
+                  <Switch>
+                    <PrivateRoute exact path="/" component={Home} />
+                    <PrivateRoute
+                      exact
+                      path="/security"
+                      component={SecurityGroup}
+                    />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                  </Switch>
+                </div>
+              </Fragment>
+            </Router>
+          </AlertState>
+        </InstanceState>
+      </SecurityGroupState>
     </AuthState>
   );
 };
