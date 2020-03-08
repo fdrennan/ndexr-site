@@ -34,7 +34,7 @@ const Instance = () => {
           onClick={refreshInstances}
         />
       </div>
-      <br />
+
       <div>
         {instances !== null && !loading ? (
           <TransitionGroup>

@@ -62,7 +62,7 @@ const InstanceItem = ({ instance }) => {
   };
 
   return (
-    <div className="card bg-light">
+    <div className="card bg-light fa-center">
       <button onClick={buttonPush} className="btn btn-primary btn-block">
         <div className="div-left">
           {!public_ip_address ? (

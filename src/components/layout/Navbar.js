@@ -24,6 +24,9 @@ const Navbar = ({ title, icon }) => {
   const authLinks = (
     <Fragment>
       <li>
+        <Link to="/">Build Server</Link>
+      </li>
+      <li>
         <Link to="/security">Security</Link>
       </li>
       <li>
