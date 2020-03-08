@@ -10,7 +10,8 @@ import {
   FILTER_INSTANCES,
   CLEAR_INSTANCES,
   CLEAR_INSTANCE_FILTER,
-  INSTANCE_ERROR
+  INSTANCE_ERROR,
+  SET_LOADING
 } from "../types";
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
@@ -28,6 +29,10 @@ const InstanceState = props => {
 
   // Get Instance
   const getInstances = async () => {
+    dispatch({
+      type: SET_LOADING,
+      payload: true
+    });
     try {
       const res = await axios.get(`${R_HOST}:${R_PORT}/instance_data`, {
         headers: {

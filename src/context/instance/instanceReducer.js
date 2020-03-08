@@ -6,11 +6,17 @@ import {
   FILTER_INSTANCES,
   CLEAR_INSTANCE_FILTER,
   INSTANCE_ERROR,
-  CLEAR_INSTANCES
+  CLEAR_INSTANCES,
+  SET_LOADING
 } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload
+      };
     case GET_INSTANCES:
       console.log("GET_INSTANCES");
       console.log(action.payload);
