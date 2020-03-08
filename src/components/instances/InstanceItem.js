@@ -144,7 +144,7 @@ const InstanceItem = ({ instance }) => {
           </p>
         }
         {
-          <p>
+          <div>
             <input
               type="text"
               placeholder="t2.xlarge"
@@ -155,7 +155,7 @@ const InstanceItem = ({ instance }) => {
             <button className="btn btn-danger btn-sm" onClick={onModify}>
               Modify
             </button>
-          </p>
+          </div>
         }
       </Collapse>
     </div>

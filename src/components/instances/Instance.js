@@ -3,10 +3,9 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
 import InstanceContext from "../../context/instance/instanceContext";
-const Instance = () => {
-  // sleep time expects milliseconds
-  const instanceContext = useContext(InstanceContext);
 
+const Instance = () => {
+  const instanceContext = useContext(InstanceContext);
   const { instances, getInstances, loading } = instanceContext;
 
   useEffect(() => {
@@ -27,30 +26,33 @@ const Instance = () => {
   }
 
   return (
-    <Fragment>
-      <button
-        type="button"
-        onClick={refreshInstances}
-        className="btn btn-primary btn-block"
-      >
-        Refresh!
-      </button>
-      {instances !== null && !loading ? (
-        <TransitionGroup>
-          {instances.map(instance => (
-            <CSSTransition
-              key={instance.instance_id}
-              timeout={500}
-              classNames="item"
-            >
-              <InstanceItem instance={instance} />
-            </CSSTransition>
-          ))}
-        </TransitionGroup>
-      ) : (
-        <Spinner />
-      )}
-    </Fragment>
+    <div>
+      <div className="container">
+        <h2 className="div-left text-primary">Created Servers</h2>
+        <button
+          className="fas fa-sync-alt div-right fa-center"
+          onClick={refreshInstances}
+        />
+      </div>
+      <br />
+      <div>
+        {instances !== null && !loading ? (
+          <TransitionGroup>
+            {instances.map(instance => (
+              <CSSTransition
+                key={instance.instance_id}
+                timeout={500}
+                classNames="item"
+              >
+                <InstanceItem instance={instance} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        ) : (
+          <Spinner />
+        )}
+      </div>
+    </div>
   );
 };
 
