@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Collapse } from "react-collapse";
 
 import InstanceContext from "../../context/instance/instanceContext";
@@ -16,9 +16,9 @@ const InstanceItem = ({ instance }) => {
 
   const [hidden, setHidden] = useState(false);
 
-  useEffect(() => {
-    console.log(instance);
-  }, []);
+  // useEffect(() => {
+  //   console.log(instance);
+  // }, []);
   const {
     image_id,
     instance_id,

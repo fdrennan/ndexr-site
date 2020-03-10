@@ -6,7 +6,7 @@ import { GET_SECURITY_GROUP, CREATE_KEY_FILE } from "../types";
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
 const R_HOST = "http://127.0.0.1";
-const R_PORT = 5623;
+const R_PORT = 8000;
 
 const SecurityGroupState = props => {
   const initialState = {
@@ -16,7 +16,7 @@ const SecurityGroupState = props => {
   const [state, dispatch] = useReducer(securityGroupReducer, initialState);
   // Get Instance
   const getSecurityGroup = async () => {
-    console.log("Hello");
+    console.log("Inside getSecurityGroup");
     // dispatch({
     //   type: SET_LOADING,
     //   payload: true
@@ -40,6 +40,7 @@ const SecurityGroupState = props => {
   };
 
   const createKeyFile = async keyName => {
+    console.log("Inside createKeyFile");
     try {
       const res = await axios.get(`${R_HOST}:${R_PORT}/keyfile_create`, {
         headers: {

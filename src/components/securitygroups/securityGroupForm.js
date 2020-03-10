@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 import SecurityGroupContext from "../../context/securitygroup/securityGroupContext";
 
 const SecurityGroupForm = () => {
@@ -13,6 +13,7 @@ const SecurityGroupForm = () => {
 
   useEffect(() => {
     getSecurityGroup();
+    // eslint-disable-next-line
   }, []);
 
   const onChange = e => {
@@ -26,12 +27,46 @@ const SecurityGroupForm = () => {
   return (
     <form onSubmit={onSubmit}>
       {securityGroups &&
-        securityGroups.map(x => (
-          <div className="container" key={x.group_name}>
-            {/*<h1>{x.group_name}</h1>*/}
-            {/*<h2>{x.group_id}</h2>*/}
-          </div>
-        ))}
+        JSON.parse(securityGroups).map(x => {
+          console.log(x);
+          console.log(x.data);
+          const dataMap = x.data.map(x => {
+            return (
+              <tr>
+                <td>{x.ip_ranges}</td>
+                <td>{x.from_port}</td>
+                <td>{x.to_port}</td>
+              </tr>
+            );
+          });
+          return (
+            <div className="container">
+              <div>
+                <h2>{x.group_name}</h2>
+                <h3>{x.group_id}</h3>
+              </div>
+              {
+                <table>
+                  <tbody>
+                    <tr key={"tbody"}>
+                      <td key={0}>Ip Address</td>
+                      <td key={1}>From Port</td>
+                      <td key={2}>To Port</td>
+                    </tr>
+                    {dataMap}
+                  </tbody>
+                </table>
+              }
+            </div>
+          );
+        })
+      // securityGroups.map(x => (
+      //   <div className="container">
+      //     <h1>{x}</h1>
+      //     {/*<h2>{x.group_id}</h2>*/}
+      //   </div>
+      // ))
+      }
       <h2 className="text-primary">Add Security Group</h2>
       <input
         type="text"

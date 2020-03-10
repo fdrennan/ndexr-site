@@ -18,8 +18,6 @@ export default (state, action) => {
         loading: action.payload
       };
     case GET_INSTANCES:
-      console.log("GET_INSTANCES");
-      console.log(action.payload);
       return {
         ...state,
         instances: action.payload,
