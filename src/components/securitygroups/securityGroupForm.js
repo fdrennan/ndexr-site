@@ -41,9 +41,9 @@ const SecurityGroupForm = () => {
           });
           return (
             <div className="container">
-              <div>
-                <h2>{x.group_name}</h2>
-                <h3>{x.group_id}</h3>
+              <div key={x.group_name}>
+                <h2 key={x.group_name}>{x.group_name}</h2>
+                <h3 key={x.group_id}>{x.group_id}</h3>
               </div>
               {
                 <table>
@@ -59,14 +59,7 @@ const SecurityGroupForm = () => {
               }
             </div>
           );
-        })
-      // securityGroups.map(x => (
-      //   <div className="container">
-      //     <h1>{x}</h1>
-      //     {/*<h2>{x.group_id}</h2>*/}
-      //   </div>
-      // ))
-      }
+        })}
       <h2 className="text-primary">Add Security Group</h2>
       <input
         type="text"

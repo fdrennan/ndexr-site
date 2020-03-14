@@ -16,7 +16,7 @@ import {
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
 const R_HOST = "http://127.0.0.1";
-const R_PORT = 8000;
+const R_PORT = process.env.REACT_APP_PORT;
 const InstanceState = props => {
   const initialState = {
     instances: null,
@@ -29,10 +29,12 @@ const InstanceState = props => {
 
   // Get Instance
   const getInstances = async () => {
+    console.log("GET INSTANCES");
     dispatch({
       type: SET_LOADING,
       payload: true
     });
+    console.log(`${R_HOST}:${R_PORT}/instance_data`);
     try {
       const res = await axios.get(`${R_HOST}:${R_PORT}/instance_data`, {
         headers: {
@@ -44,6 +46,8 @@ const InstanceState = props => {
       });
 
       const { data } = res.data;
+
+      console.log(data);
       dispatch({
         type: GET_INSTANCES,
         payload: data
@@ -56,6 +60,7 @@ const InstanceState = props => {
 
   // Add Contact
   const addInstance = async instance => {
+    console.log("ADD INSTANCES");
     try {
       const {
         instanceType,
@@ -64,6 +69,7 @@ const InstanceState = props => {
         imageId,
         securityGroupName
       } = instance;
+      console.log(`${R_HOST}:${R_PORT}/create_instance`);
       await axios.get(`${R_HOST}:${R_PORT}/create_instance`, {
         headers: {
           "Content-Type": "application/json"

@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
-const Navbar = ({ title, icon }) => {
+const Navbar = () => {
   const authContext = useContext(AuthContext);
-
+  const [title, setTitle] = useState("NDEXR");
+  const [icon, setIcon] = useState("fas fa-microchip");
   const { isAuthenticated, logout, loadUser } = authContext;
 
   useEffect(() => {
@@ -26,9 +26,8 @@ const Navbar = ({ title, icon }) => {
         <Link to="/security">Security</Link>
       </li>
       <li>
-        <a onClick={onLogout} href="#!">
-          <i className="fas fa-sign-out-alt" />{" "}
-          <span className="hide-sm">Logout</span>
+        <a onClick={onLogout} href="#">
+          <i className="fas fa-sign-out-alt" /> <span>Logout</span>
         </a>
       </li>
     </Fragment>
@@ -36,37 +35,21 @@ const Navbar = ({ title, icon }) => {
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
     </Fragment>
   );
 
   return (
-    <div className="navbar bg-primary">
-      <div className="navbar-left">
-        <h1>
-          <Link to="/">
-            <i className={icon} /> {title}
-          </Link>
-        </h1>
-      </div>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
-    </div>
+    <header>
+      <h1>
+        <Link to="/">
+          <i className={icon} /> {title}
+        </Link>
+      </h1>
+      {isAuthenticated ? authLinks : guestLinks}
+    </header>
   );
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string
-};
-
-Navbar.defaultProps = {
-  title: "NDEXR",
-  icon: "fas fa-microchip"
 };
 
 export default Navbar;
