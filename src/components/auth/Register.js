@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://images.unsplash.com/photo-1571764592091-e852a14c8ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3034&q=80)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -58,7 +59,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   right: {
-    textAlign: "right"
+    textAlign: "right",
+    width: "100%"
   }
 }));
 
