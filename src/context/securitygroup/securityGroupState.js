@@ -6,7 +6,7 @@ import { GET_SECURITY_GROUP, CREATE_KEY_FILE } from "../types";
 
 // BASE AMI: ami-0f75bb5fd5fa9f972
 const R_HOST = "http://127.0.0.1";
-const R_PORT = 8000;
+const R_PORT = process.env.REACT_APP_PORT;
 
 const SecurityGroupState = props => {
   const initialState = {
