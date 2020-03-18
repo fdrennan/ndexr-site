@@ -7,9 +7,23 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../../Theme";
 import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+
+const pageStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& > *": {
+      margin: theme.spacing(1)
+    }
+  }
+}));
 
 const InstanceItem = ({ instance }) => {
+  const pageClasses = pageStyles();
   const instanceContext = useContext(InstanceContext);
   const securityGroupContext = useContext(SecurityGroupContext);
   const {
@@ -140,8 +154,8 @@ const InstanceItem = ({ instance }) => {
           <Typography>{`Instance Id: ${instance_id}`}</Typography>
           // </li>
         )}
+        <br />
         {key_name && (
-          // <li>
           <Button
             onClick={displayPem}
             fullWidth
@@ -151,39 +165,43 @@ const InstanceItem = ({ instance }) => {
           >
             Display PEM in Console - To see push [CMD+OPT+I] in Chrome
           </Button>
-          // </li>
         )}
-
+        <br />
         {
-          <p>
-            <Button
-              fullWidth
-              variant="contained"
+          <div className={pageClasses.root}>
+            <ButtonGroup
               color="primary"
-              className={classes.submit}
-              onClick={startServer}
+              aria-label="outlined primary button group"
             >
-              Start
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={stopServer}
-            >
-              Stop
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={onDelete}
-            >
-              Terminate
-            </Button>
-          </p>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={startServer}
+              >
+                Start
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={stopServer}
+              >
+                Stop
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={onDelete}
+              >
+                Terminate
+              </Button>
+            </ButtonGroup>
+          </div>
         }
         {
           <div>
@@ -215,7 +233,7 @@ const InstanceItem = ({ instance }) => {
           </div>
         }
       </Collapse>
-      <hr />
+      <br />
     </Grid>
   );
 };
