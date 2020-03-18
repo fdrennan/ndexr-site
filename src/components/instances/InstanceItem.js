@@ -3,6 +3,12 @@ import { Collapse } from "react-collapse";
 
 import InstanceContext from "../../context/instance/instanceContext";
 import SecurityGroupContext from "../../context/securitygroup/securityGroupContext";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import useStyles from "../../Theme";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+
 const InstanceItem = ({ instance }) => {
   const instanceContext = useContext(InstanceContext);
   const securityGroupContext = useContext(SecurityGroupContext);
@@ -13,7 +19,7 @@ const InstanceItem = ({ instance }) => {
   } = instanceContext;
 
   const { createKeyFile } = securityGroupContext;
-
+  const classes = useStyles();
   const [hidden, setHidden] = useState(false);
 
   // useEffect(() => {
@@ -72,110 +78,145 @@ const InstanceItem = ({ instance }) => {
   };
 
   return (
-    <div className="card bg-light fa-center">
-      <button onClick={buttonPush} className="btn btn-primary btn-block">
-        <div className="div-left">
-          {!public_ip_address ? (
-            <strong>{state[0].toUpperCase() + state.slice(1)}</strong>
-          ) : (
-            <strong>{public_ip_address}</strong>
-          )}
-        </div>
-        <i className="fas fa-bars div-right" />
-      </button>
-
+    <Grid>
+      <Grid>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.submit}
+          onClick={buttonPush}
+        >
+          <div className={classes.card}>
+            {!public_ip_address ? (
+              <strong>{state[0].toUpperCase() + state.slice(1)}</strong>
+            ) : (
+              <strong>{public_ip_address}</strong>
+            )}
+          </div>
+          <hr />
+          <i className="fas fa-bars div-right" />
+        </Button>
+      </Grid>
       <Collapse isOpened={hidden}>
         <code>{login}</code>
-        <ul className="list">
-          {public_ip_address && (
-            <li>
-              <p>
-                <strong>Public IP:</strong> {public_ip_address}
-              </p>
-            </li>
-          )}
-        </ul>
-        <ul className="list">
-          {launch_time && (
-            <li>
-              <p>
-                <strong>Launch Time:</strong> {launch_time}
-              </p>
-            </li>
-          )}
-          {state && (
-            <li>
-              <p>
-                <strong>Current State:</strong> {state}
-              </p>
-            </li>
-          )}
-          {instance_type && (
-            <li>
-              <p>
-                <strong>Instance Type:</strong> {instance_type}
-              </p>
-            </li>
-          )}
-          {instance_storage && (
-            <li>
-              <p>
-                <strong>Instance Storage:</strong> {instance_storage}
-              </p>
-            </li>
-          )}
-          {image_id && (
-            <li>
-              <p>
-                <strong>AMI Type:</strong> {image_id}
-              </p>
-            </li>
-          )}
+        {/*<ul className="list">*/}
+        {public_ip_address && (
+          // <li>
+          <Typography>{`Public IP: ${public_ip_address}`}</Typography>
+          // </li>
+        )}
+        {/*</ul>*/}
+        {/*<ul className="list">*/}
+        {launch_time && (
+          // <li>
+          <Typography>{`Launch Time: ${launch_time}`}</Typography>
+          // </li>
+        )}
+        {state && (
+          // <li>
+          <Typography>{`Current State: ${state}`}</Typography>
+          // </li>
+        )}
+        {instance_type && (
+          // <li>
+          <Typography>{`Instance Type: ${instance_type}`}</Typography>
+          // </li>
+        )}
+        {instance_storage && (
+          // <li>
+          <Typography>{`Instance Storage: ${instance_storage}`}</Typography>
+          // </li>
+        )}
+        {image_id && (
+          // <li>
+          <Typography>{`AMI Type: ${image_id}`}</Typography>
+          // </li>
+        )}
 
-          {instance_id && (
-            <li>
-              <p>
-                <strong>Instance Id:</strong> {instance_id}
-              </p>
-            </li>
-          )}
-          {key_name && (
-            <li>
-              <button className="btn btn-success btn-sm" onClick={displayPem}>
-                Display PEM in Console - To see push [CMD+OPT+I] in Chrome
-              </button>
-            </li>
-          )}
-        </ul>
+        {instance_id && (
+          // <li>
+          <Typography>{`Instance Id: ${instance_id}`}</Typography>
+          // </li>
+        )}
+        {key_name && (
+          // <li>
+          <Button
+            onClick={displayPem}
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Display PEM in Console - To see push [CMD+OPT+I] in Chrome
+          </Button>
+          // </li>
+        )}
+
         {
           <p>
-            <button className="btn btn-success btn-sm" onClick={startServer}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={startServer}
+            >
               Start
-            </button>
-            <button className="btn btn-white btn-sm" onClick={stopServer}>
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={stopServer}
+            >
               Stop
-            </button>
-            <button className="btn btn-danger btn-sm" onClick={onDelete}>
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={onDelete}
+            >
               Terminate
-            </button>
+            </Button>
           </p>
         }
         {
           <div>
-            <input
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="instanceType"
+              label="Instance Type"
+              autoComplete="email"
+              autoFocus
               type="text"
               placeholder="t2.xlarge"
               name="instanceType"
               value={instanceType}
               onChange={onSetInstanceType}
             />
-            <button className="btn btn-danger btn-sm" onClick={onModify}>
+
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={onModify}
+            >
               Modify
-            </button>
+            </Button>
           </div>
         }
       </Collapse>
-    </div>
+      <hr />
+    </Grid>
   );
 };
 

@@ -4,8 +4,14 @@ import InstanceItem from "./InstanceItem";
 import Spinner from "../layout/Spinner";
 import InstanceContext from "../../context/instance/instanceContext";
 import SecurityGroupContext from "../../context/securitygroup/securityGroupContext";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import useStyles from "../../Theme";
 
+import TextField from "@material-ui/core/TextField";
 const Instance = () => {
+  const classes = useStyles();
+
   const instanceContext = useContext(InstanceContext);
   const securityGroupContext = useContext(SecurityGroupContext);
   const { instances, getInstances, loading } = instanceContext;
@@ -26,20 +32,28 @@ const Instance = () => {
 
   if (instances === "false") {
     return (
-      <div>
-        <h2>Create an instance to get started</h2>
-      </div>
+      <Typography>
+        <h1>Create an instance to get started</h1>
+      </Typography>
     );
   }
 
   return (
     <div>
-      <div className="container">
-        <h2 className="div-left text-primary">Created Servers</h2>
-        <button
-          className="fas fa-sync-alt div-right fa-center"
-          onClick={refreshInstances}
-        />
+      {/*<Typography>*/}
+      {/*  <h1>Created Servers</h1>*/}
+      {/*</Typography>*/}
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        onClick={refreshInstances}
+      >
+        Refresh
+      </Button>
+      <div>
+        <br />
       </div>
 
       <div>

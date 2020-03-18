@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/pages/Home";
+import CreateInstance from "./components/pages/CreateInstance";
 import About from "./components/pages/About";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -13,43 +13,37 @@ import SecurityGroupState from "./context/securitygroup/securityGroupState";
 import SecurityGroup from "./components/pages/SecurityGroup";
 import Scratch from "./components/scratch/Scratch";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 import "./sass/index.scss";
-// import "./NewApp.scss";
 
 const App = () => {
   return (
-    <Fragment>
-      <CssBaseline>
-        <AuthState>
-          <SecurityGroupState>
-            <InstanceState>
-              <AlertState>
-                <Router>
-                  <Fragment>
-                    <div className="container">
-                      <Alerts />
-                      <Switch>
-                        <PrivateRoute exact path="/" component={Home} />
-                        <PrivateRoute
-                          exact
-                          path="/security"
-                          component={SecurityGroup}
-                        />
-                        <Route exact path="/scratch" component={Scratch} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/login" component={Login} />
-                      </Switch>
-                    </div>
-                  </Fragment>
-                </Router>
-              </AlertState>
-            </InstanceState>
-          </SecurityGroupState>
-        </AuthState>
-      </CssBaseline>
-    </Fragment>
+    <CssBaseline>
+      <AuthState>
+        <SecurityGroupState>
+          <InstanceState>
+            <AlertState>
+              <Router>
+                <div className="container">
+                  <Alerts />
+                  <Switch>
+                    <PrivateRoute exact path="/" component={CreateInstance} />
+                    <PrivateRoute
+                      exact
+                      path="/security"
+                      component={SecurityGroup}
+                    />
+                    <Route exact path="/scratch" component={Scratch} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                  </Switch>
+                </div>
+              </Router>
+            </AlertState>
+          </InstanceState>
+        </SecurityGroupState>
+      </AuthState>
+    </CssBaseline>
   );
 };
 
