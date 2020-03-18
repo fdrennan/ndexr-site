@@ -9,6 +9,7 @@ import useStyles from "../../Theme";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
 const pageStyles = makeStyles(theme => ({
@@ -114,6 +115,70 @@ const InstanceItem = ({ instance }) => {
         </Button>
       </Grid>
       <Collapse isOpened={hidden}>
+        <div className={pageClasses.root}>
+          <ButtonGroup
+            color="primary"
+            aria-label="outlined primary button group"
+          >
+            <Box p={1}>
+              <Button
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+                onClick={startServer}
+              >
+                Start
+              </Button>
+            </Box>
+            <Box p={1}>
+              <Button
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+                onClick={stopServer}
+              >
+                Stop
+              </Button>
+            </Box>
+            <Box p={1}>
+              <Button
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+                onClick={onDelete}
+              >
+                Terminate
+              </Button>
+            </Box>
+          </ButtonGroup>
+        </div>
+        <div>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="instanceType"
+            label="Instance Type"
+            autoComplete="email"
+            autoFocus
+            type="text"
+            placeholder="t2.xlarge"
+            name="instanceType"
+            value={instanceType}
+            onChange={onSetInstanceType}
+          />
+
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={onModify}
+          >
+            Modify
+          </Button>
+        </div>
         <code>{login}</code>
         {/*<ul className="list">*/}
         {public_ip_address && (
@@ -166,72 +231,6 @@ const InstanceItem = ({ instance }) => {
             Display PEM in Console - To see push [CMD+OPT+I] in Chrome
           </Button>
         )}
-        <br />
-        {
-          <div className={pageClasses.root}>
-            <ButtonGroup
-              color="primary"
-              aria-label="outlined primary button group"
-            >
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={startServer}
-              >
-                Start
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={stopServer}
-              >
-                Stop
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={onDelete}
-              >
-                Terminate
-              </Button>
-            </ButtonGroup>
-          </div>
-        }
-        {
-          <div>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="instanceType"
-              label="Instance Type"
-              autoComplete="email"
-              autoFocus
-              type="text"
-              placeholder="t2.xlarge"
-              name="instanceType"
-              value={instanceType}
-              onChange={onSetInstanceType}
-            />
-
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={onModify}
-            >
-              Modify
-            </Button>
-          </div>
-        }
       </Collapse>
       <br />
     </Grid>
