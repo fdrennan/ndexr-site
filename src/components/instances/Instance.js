@@ -40,9 +40,6 @@ const Instance = () => {
 
   return (
     <div>
-      {/*<Typography>*/}
-      {/*  <h1>Created Servers</h1>*/}
-      {/*</Typography>*/}
       <Button
         fullWidth
         variant="contained"

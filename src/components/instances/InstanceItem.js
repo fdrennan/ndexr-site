@@ -20,6 +20,10 @@ const pageStyles = makeStyles(theme => ({
     "& > *": {
       margin: theme.spacing(1)
     }
+  },
+  border: {
+    borderWidth: "10px",
+    border: "solid"
   }
 }));
 
@@ -93,7 +97,7 @@ const InstanceItem = ({ instance }) => {
   };
 
   return (
-    <Grid>
+    <Box m={2} p={2} border={1} borderRadius={16}>
       <Grid>
         <Button
           type="submit"
@@ -232,8 +236,7 @@ const InstanceItem = ({ instance }) => {
           </Button>
         )}
       </Collapse>
-      <br />
-    </Grid>
+    </Box>
   );
 };
 

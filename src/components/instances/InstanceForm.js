@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../../Theme";
+import Box from "@material-ui/core/Box";
 
 const InstanceForm = () => {
   const classes = useStyles();
@@ -67,7 +68,7 @@ const InstanceForm = () => {
   };
 
   return (
-    <div>
+    <Box m={2} p={2} border={1} borderRadius={16}>
       <form className={classes.form} onSubmit={onSubmit}>
         <div>
           <Typography>
@@ -169,7 +170,7 @@ const InstanceForm = () => {
           )}
         </div>
       </form>
-    </div>
+    </Box>
   );
 };
 
